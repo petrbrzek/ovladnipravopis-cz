@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "regions": ["bru1"],
+  "build": {
+    "env": {
+      "PRISMA_PROVIDER": "@prisma_provider",
+      "PRISMA_URL": "@prisma_url"
+    }
+  },
+  "env": {
+    "PRISMA_PROVIDER": "@prisma_provider",
+    "PRISMA_URL": "@prisma_url",
+    "MONGO_URL": "@mongo_url"
+  }
+}

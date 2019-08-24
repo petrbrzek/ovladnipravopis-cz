@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "font-face.css";
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8rem;
+  overscroll-behavior-y: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: auto;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.text-xss {
+  font-size: 0.7rem;
+}
+
+.text-xsss {
+  font-size: 0.6rem;
+}
+
+.shake {
+  animation: wrong 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes wrong {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

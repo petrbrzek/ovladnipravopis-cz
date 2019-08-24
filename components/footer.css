@@ -1,0 +1,8 @@
+.footer {
+  background: #d28046;
+}
+
+.footer__user {
+  background: #e5ab5b;
+  border-left: 1px solid #fde2bc;
+}

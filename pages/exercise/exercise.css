@@ -1,0 +1,13 @@
+.default {
+  background: white;
+}
+
+.wrong {
+  background: #fc664e;
+  border: 1px solid #707070;
+}
+
+.correct {
+  background: #90f89e;
+  border: 1px solid #707070;
+}

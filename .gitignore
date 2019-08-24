@@ -1,0 +1,8 @@
+node_modules
+.next
+.env
+.adminbro
+dev-env
+prisma/prisma
+prisma/__migrations
+prisma/migrations/dev
