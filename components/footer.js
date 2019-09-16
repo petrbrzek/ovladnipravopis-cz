@@ -1,5 +1,6 @@
 import React from "react";
 import { useMappedState } from "redux-react-hook";
+import Link from "next/link";
 
 import { getHighestLevel } from "../lib/user-utils";
 import User from "../public/user.svg";
@@ -22,9 +23,11 @@ export default function Footer() {
       <div className="flex px-3">
         <p className="p-1">Status: {highestRank}</p>
       </div>
-      <div className="flex ml-auto footer__user items-center h-full p-3 px-5">
-        <User />
-      </div>
+      <Link href={`/settings`}>
+        <a className="flex ml-auto footer__user items-center h-full p-3 px-5">
+          <User />
+        </a>
+      </Link>
     </div>
   );
 }
