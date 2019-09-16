@@ -13,15 +13,15 @@ import FoxLeftSide from "../../public/fox-left-side.svg";
 
 function Header({ title, content, levelId }) {
   return (
-    <div className="flex items-center px-2 header-bg">
-      <div className="flex flex-col h-full">
+    <div className="flex px-2 header-bg">
+      <div className="flex flex-col">
         <Link href={`/?level=${levelId}`}>
-          <a className="h-full flex items-center px-1">
+          <a className="flex flex-1 items-center px-1">
             <LeftArrow />
           </a>
         </Link>
       </div>
-      <div className="flex flex-col flex-1 p-2 px-3">
+      <div className="flex flex-col flex-1 justify-center p-2 px-3">
         <h1 className="text-base font-bold leading-tight">{title}</h1>
         <p className="text-xsss leading-tight pt-1">{content}</p>
       </div>
