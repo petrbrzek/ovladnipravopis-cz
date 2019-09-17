@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "alias": "ovladnipravopis.cz",
   "regions": ["bru1"],
   "build": {
     "env": {
