@@ -2,3 +2,11 @@
   background: #e4e2e2;
   min-height: 115px;
 }
+
+.header-text-color {
+  color: #494949;
+}
+
+.header-border-color {
+  border-color: #bebebe;
+}
