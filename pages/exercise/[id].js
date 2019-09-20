@@ -39,7 +39,7 @@ const handleAllCorrectCards = ({ allCorrect, api, exerciseId, levelId }) => {
       return;
     }
 
-    api.post(`${process.env.API_ENDPOINT}/api/user/mark`, {
+    api.post(api.normalizeUrl(`/api/user/mark`), {
       json: { exerciseId }
     });
 
@@ -64,7 +64,7 @@ const checkIfCardIsCorrect = (cardId, cards) => {
 };
 
 const sendUserStats = (api, { exerciseId, cardId, state }, options = {}) => {
-  api.post(`${process.env.API_ENDPOINT}/api/user/stats`, {
+  api.post(api.normalizeUrl(`/api/user/stats`, options.req), {
     ...options,
     json: {
       exerciseId,
@@ -155,14 +155,15 @@ Exercise.getInitialProps = async ({ query, req, services: { api } }) => {
   const options = {
     headers: {
       cookie: req?.headers?.cookie
-    }
+    },
+    req
   };
 
   sendUserStats(api, { exerciseId: id, state: "OPEN" }, options);
 
   const [cards, exercise] = await Promise.all([
-    api.get(`${process.env.API_ENDPOINT}/api/cards?exerciseId=${id}`, options),
-    api.get(`${process.env.API_ENDPOINT}/api/exercise?id=${id}`, options)
+    api.get(api.normalizeUrl(`/api/cards?exerciseId=${id}`, req), options),
+    api.get(api.normalizeUrl(`/api/exercise?id=${id}`, req), options)
   ]);
 
   return {

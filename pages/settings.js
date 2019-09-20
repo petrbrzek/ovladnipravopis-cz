@@ -7,7 +7,8 @@ export default function Settings() {
   const services = React.useContext(Services);
 
   const handleLogout = async () => {
-    await services.api.get(`${process.env.API_ENDPOINT}/api/user/logout`);
+    const { api } = services;
+    await api.get(api.normalizeUrl(`/api/user/logout`));
     Router.push("/");
   };
 

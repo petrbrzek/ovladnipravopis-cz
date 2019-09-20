@@ -62,8 +62,8 @@ async function getUserData({ query, req, reduxStore, services: { api } }) {
   };
 
   const [levels, exercises] = await Promise.all([
-    api.get(`${process.env.API_ENDPOINT}/api/levels`, options),
-    api.get(`${process.env.API_ENDPOINT}/api/exercises?level=${level}`, options)
+    api.get(api.normalizeUrl(`/api/levels`, req), options),
+    api.get(api.normalizeUrl(`/api/exercises?level=${level}`, req), options)
   ]);
 
   if (exercises?.error && exercises?.reason === "LEVEL_LOCKED") {

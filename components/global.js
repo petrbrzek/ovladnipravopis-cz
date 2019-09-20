@@ -19,9 +19,8 @@ export default function Global({ children }) {
 
   React.useEffect(() => {
     async function fetchData() {
-      const personalInfo = await services.api.get(
-        `${process.env.API_ENDPOINT}/api/user/me`
-      );
+      const { api } = services;
+      const personalInfo = await api.get(api.normalizeUrl(`/api/user/me`));
       dispatch({ type: "USER:PERSONAL_INFO", personalInfo });
     }
     fetchData();

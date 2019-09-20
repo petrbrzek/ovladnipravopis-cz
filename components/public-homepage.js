@@ -11,7 +11,7 @@ async function login(api, { email, password }) {
   let result;
   try {
     result = await api
-      .post(`${process.env.API_ENDPOINT}/api/user/login`, {
+      .post(api.normalizeUrl(`/api/user/login`), {
         json: { password, email },
         throwHttpErrors: false
       })
