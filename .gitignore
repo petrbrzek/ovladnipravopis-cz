@@ -2,6 +2,7 @@ node_modules
 .next
 .env
 .adminbro
+_local-script.js
 dev-env
 prisma/prisma
 prisma/__migrations

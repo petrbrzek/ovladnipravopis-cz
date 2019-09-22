@@ -8,6 +8,8 @@ import CheckCircle from "../public/check-circle.svg";
 import Spinner from "../public/spinner.svg";
 import Lock from "../public/lock.svg";
 
+import "./content.css";
+
 export default function Content() {
   const mapState = React.useCallback(
     state => ({
@@ -46,7 +48,7 @@ export default function Content() {
             as={`/exercise/${exercise._id}`}
             key={exercise._id}
           >
-            <a className="flex p-3 border-solid border-b border-gray-300">
+            <a className="item flex p-3 border-solid border-b border-gray-300">
               <div className="pr-2">
                 <h2 className="text-base font-bold pb-1">{exercise.title}</h2>
                 <p className="text-xs text-gray-800">{exercise.content}</p>

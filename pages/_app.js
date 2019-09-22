@@ -1,7 +1,7 @@
 import "../public/styles/index.css";
 
 import React from "react";
-import App, { Container } from "next/app";
+import App from "next/app";
 import { StoreContext } from "redux-react-hook";
 
 import withUser from "../lib/with-user";
@@ -13,15 +13,13 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, reduxStore, services } = this.props;
     return (
-      <Container>
-        <Services.Provider value={services}>
-          <StoreContext.Provider value={reduxStore}>
-            <Global>
-              <Component {...pageProps} />
-            </Global>
-          </StoreContext.Provider>
-        </Services.Provider>
-      </Container>
+      <Services.Provider value={services}>
+        <StoreContext.Provider value={reduxStore}>
+          <Global>
+            <Component {...pageProps} />
+          </Global>
+        </StoreContext.Provider>
+      </Services.Provider>
     );
   }
 }
