@@ -33,6 +33,7 @@ export default async (req, res) => {
       .populate({
         path: "exercises",
         select: "_id title content",
+        match: { published: { $eq: true } },
         populate: [
           {
             path: "cards",
