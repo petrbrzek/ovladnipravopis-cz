@@ -10,6 +10,9 @@ module.exports = withBundleAnalyzer(
     withPurgeCss({
       purgeCssEnabled: ({ dev, isServer }) => !dev && !isServer,
       purgeCssPaths: ["pages/**/*", "components/**/*"],
+      purgeCss: {
+        whitelist: () => ["html", "body"]
+      },
       webpack(config, options) {
         config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
         return config;
