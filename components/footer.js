@@ -3,7 +3,7 @@ import { useMappedState } from "redux-react-hook";
 import Link from "next/link";
 
 import { getHighestLevel } from "../lib/user-utils";
-import User from "../public/user.svg";
+import User from "../static/user.svg";
 
 import "./footer.css";
 

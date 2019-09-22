@@ -8,12 +8,12 @@ import { Services } from "../../lib/with-services";
 import { shuffleArray } from "../../lib/utils";
 
 import "./exercise.css";
-import LeftArrow from "../../public/left-arrow.svg";
-import FoxLeftSide from "../../public/fox-left-side.svg";
+import LeftArrow from "../../static/left-arrow.svg";
+import FoxLeftSide from "../../static/fox-left-side.svg";
 
 function Header({ title, content, levelId }) {
   return (
-    <div className="flex px-2 header-bg">
+    <div className="flex px-2 header-bg sticky top-0">
       <div className="flex flex-col">
         <Link href={`/?level=${levelId}`}>
           <a className="flex flex-1 items-center px-1">

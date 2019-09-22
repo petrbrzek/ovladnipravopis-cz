@@ -4,7 +4,7 @@ import { useMappedState } from "redux-react-hook";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import Fox from "../public/fox.svg";
+import Fox from "../static/fox.svg";
 import "./header.css";
 
 export function Levels() {

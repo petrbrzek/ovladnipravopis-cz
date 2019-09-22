@@ -5,7 +5,7 @@ import Router from "next/router";
 
 import { Services } from "../lib/with-services";
 
-import Fox from "../public/fox.svg";
+import Fox from "../static/fox.svg";
 
 async function login(api, { email, password }) {
   let result;

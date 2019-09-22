@@ -3,10 +3,10 @@ import { useMappedState } from "redux-react-hook";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import OpenLock from "../public/lock-open.svg";
-import CheckCircle from "../public/check-circle.svg";
-import Spinner from "../public/spinner.svg";
-import Lock from "../public/lock.svg";
+import OpenLock from "../static/lock-open.svg";
+import CheckCircle from "../static/check-circle.svg";
+import Spinner from "../static/spinner.svg";
+import Lock from "../static/lock.svg";
 
 import "./content.css";
 
