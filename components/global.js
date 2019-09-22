@@ -24,7 +24,7 @@ export default function Global({ children }) {
       dispatch({ type: "USER:PERSONAL_INFO", personalInfo });
     }
     fetchData();
-  }, [user.updatedAt, loggedIn]);
+  });
 
   return (
     <>
