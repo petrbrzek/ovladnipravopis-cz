@@ -117,7 +117,15 @@ export default function Exercise({ exercise, cards }) {
   return (
     <div className="flex flex-col flex-1">
       {isAllCorrect && (
-        <Confetti width={window.innerWidth} height={window.innerHeight} />
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0
+          }}
+        />
       )}
       <Header
         title={exercise.title}
