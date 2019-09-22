@@ -11,11 +11,12 @@ export default function Global({ children }) {
   const mapState = React.useCallback(
     state => ({
       loggedIn: state.user.loggedIn,
-      user: state.user
+      user: state.user,
+      levels: state.levels
     }),
     []
   );
-  const { loggedIn, user } = useMappedState(mapState);
+  const { loggedIn, user, levels } = useMappedState(mapState);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -24,7 +25,7 @@ export default function Global({ children }) {
       dispatch({ type: "USER:PERSONAL_INFO", personalInfo });
     }
     fetchData();
-  }, [user.updatedAt, loggedIn]);
+  }, [user.updatedAt, loggedIn, levels[levels.length - 1]?.updatedAt]);
 
   return (
     <>
