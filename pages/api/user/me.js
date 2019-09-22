@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       match: { _id: { $eq: userId } },
       select: "_id"
     })
-    .select("levelId rank -_id -users")
+    .select("levelId rank updatedAt -_id -users")
     .exec();
 
   res.status(200).json({ user, levels });
