@@ -18,6 +18,11 @@ export default function Global({ children }) {
   );
   const { loggedIn, user, levels } = useMappedState(mapState);
 
+  let lastLevel = [];
+  if (Array.isArray(levels)) {
+    lastLevel = levels[levels.length - 1];
+  }
+
   React.useEffect(() => {
     async function fetchData() {
       const { api } = services;
@@ -25,7 +30,7 @@ export default function Global({ children }) {
       dispatch({ type: "USER:PERSONAL_INFO", personalInfo });
     }
     fetchData();
-  }, [user.updatedAt, loggedIn, levels[levels.length - 1]?.updatedAt]);
+  }, [user.updatedAt, loggedIn, lastLevel?.updatedAt]);
 
   return (
     <>
