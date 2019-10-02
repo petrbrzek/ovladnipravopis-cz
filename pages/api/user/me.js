@@ -14,13 +14,8 @@ module.exports = async (req, res) => {
   const user = await User.findOne({ _id: userId }).select("_id email");
   const levels = await Level.find()
     .where("users")
-    .ne([])
-    .populate({
-      path: "users",
-      match: { _id: { $eq: userId } },
-      select: "_id"
-    })
-    .select("levelId rank updatedAt -_id -users")
+    .in([userId])
+    .select("levelId rank updatedAt -_id")
     .exec();
 
   res.status(200).json({ user, levels });

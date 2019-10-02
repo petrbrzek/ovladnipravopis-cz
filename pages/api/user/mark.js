@@ -26,15 +26,13 @@ module.exports = async (req, res) => {
     .exec();
 
   if (exercise.users.length == 0) {
-    exercise.users = [userId];
+    exercise.users.push(userId);
     await exercise.save();
   }
 
   const level = await Level.findOne()
-    .populate({
-      path: "exercises",
-      match: { _id: { $eq: exerciseId } }
-    })
+    .where("exercises")
+    .in([exerciseId])
     .exec();
 
   const levelExercises = await Level.findOne({ _id: level.id })
@@ -43,11 +41,7 @@ module.exports = async (req, res) => {
 
   const userExercises = await Exercise.find()
     .where("users")
-    .ne([])
-    .populate({
-      path: "users",
-      match: { _id: { $eq: userId } }
-    })
+    .in([userId])
     .exec();
 
   const finishedLevel = levelExercises.exercises.every(exercise => {
@@ -71,7 +65,7 @@ module.exports = async (req, res) => {
       .exec();
 
     if (level.users.length == 0) {
-      level.users = [userId];
+      level.users.push(userId);
       await level.save();
     }
   }

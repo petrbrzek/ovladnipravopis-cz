@@ -12,11 +12,7 @@ export default async (req, res) => {
 
   const levelsByUser = await Level.find()
     .where("users")
-    .ne()
-    .populate({
-      path: "users",
-      match: { _id: { $eq: userId } }
-    })
+    .in([userId])
     .exec();
 
   const userLevels = [...levelsByUser, { levelId: 1 }];

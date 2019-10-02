@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
       .exec();
 
     if (level.users.length == 0) {
-      level.users = [user._id];
+      level.users.push(user._id);
       await level.save();
     }
   } catch (e) {
