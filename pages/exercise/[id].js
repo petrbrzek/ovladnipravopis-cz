@@ -12,6 +12,10 @@ import LeftArrow from "../../static/left-arrow.svg";
 import FoxLeftSide from "../../static/fox-left-side.svg";
 
 function Header({ title, content, levelId }) {
+  const desc =
+    content ||
+    `Klikni na všechny karty, které obsahují pravopisně správný text. 
+    Pokud označíš nesprávnou kartu, hra okamžitě končí a musíš začít znovu.`;
   return (
     <div className="flex px-2 header-bg sticky top-0">
       <div className="flex flex-col">
@@ -23,7 +27,7 @@ function Header({ title, content, levelId }) {
       </div>
       <div className="flex flex-col flex-1 justify-center p-2 px-3">
         <h1 className="text-base font-bold leading-tight">{title}</h1>
-        <p className="text-xsss leading-tight pt-1">{content}</p>
+        <p className="text-xsss leading-tight pt-1">{desc}</p>
       </div>
 
       <div className="flex mt-auto">
