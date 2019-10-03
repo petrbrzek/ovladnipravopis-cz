@@ -37,7 +37,7 @@ export default function Content() {
 
       {!isLocked && levelExercises.length == 0 ? (
         <div className="flex flex-1 justify-center items-center">
-          <Spinner />
+          {exercises[activeLevel]?.levelId ? <Lock /> : <Spinner />}
         </div>
       ) : null}
 
