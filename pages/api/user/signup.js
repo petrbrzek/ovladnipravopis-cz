@@ -4,9 +4,6 @@ const get = require("lodash.get");
 
 const User = require("../../../lib/db/models/user");
 
-// TODO: move to env var
-const APP_SECRET = "8vgQ490LcugL49F5nCujaKdnLzthr0jm";
-
 module.exports = async (req, res) => {
   const plainPassword = get(req, "body.password");
   const email = get(req, "body.email");
@@ -30,7 +27,7 @@ module.exports = async (req, res) => {
   const user = await newUser.save();
 
   res.status(200).json({
-    token: jwt.sign({ userId: user.id }, APP_SECRET),
+    token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
     user: {
       id: user.id,
       email: user.email

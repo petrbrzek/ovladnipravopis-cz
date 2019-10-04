@@ -5,9 +5,6 @@ const get = require("lodash.get");
 
 const { User, Level } = require("../../../lib/db/models");
 
-// TODO: move to env var
-const APP_SECRET = "8vgQ490LcugL49F5nCujaKdnLzthr0jm";
-
 module.exports = async (req, res) => {
   const password = get(req, "body.password");
   const email = get(req, "body.email");
@@ -32,7 +29,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ userId: user.id }, APP_SECRET);
+  const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
 
   setCookie({ res }, "token", token, {
     maxAge: 30 * 24 * 60 * 60,

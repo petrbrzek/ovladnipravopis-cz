@@ -2,14 +2,9 @@
   "version": 1,
   "alias": "ovladnipravopis.cz",
   "regions": ["bru1"],
-  "build": {
-    "env": {
-      "PRISMA_PROVIDER": "@prisma_provider",
-      "PRISMA_URL": "@prisma_url"
-    }
-  },
   "env": {
     "PRISMA_PROVIDER": "@prisma_provider",
+    "APP_SECRET": "@app_secret",
     "PRISMA_URL": "@prisma_url",
     "MONGO_URL": "@mongo_url"
   }
