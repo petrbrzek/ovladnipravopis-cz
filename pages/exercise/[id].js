@@ -41,6 +41,11 @@ const handleAllCorrectCards = ({ allCorrect, api, exerciseId, levelId }) => {
       return;
     }
 
+    sendUserStats(api, {
+      exerciseId,
+      state: "FINISHED"
+    });
+
     api.post(api.normalizeUrl(`/api/user/mark`), {
       json: { exerciseId }
     });
@@ -85,11 +90,6 @@ export default function Exercise({ exercise, cards }) {
     const correct = checkIfCardIsCorrect(id, cards);
     if (correct) {
       setCardRating({ ...cardsRating, [id]: { correct: true } });
-      sendUserStats(services.api, {
-        exerciseId: exercise._id,
-        cardId: id,
-        state: "FINISHED"
-      });
       return;
     }
 
