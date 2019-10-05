@@ -138,6 +138,19 @@ export default function PublicHomepage() {
       </div>
 
       <LoginForm />
+
+      <div
+        className="flex flex-1 px-3 pt-3 pb-5 mt-1 text-xs border-solid header-border-color border-t"
+        style={{
+          background: "url(/static/fox-left-side.svg) bottom right no-repeat"
+        }}
+      >
+        <p className="header-text-color font-semibold leading-loose">
+          Máte nápad na zlepšení? 🙂Napište mi na adresu:
+          <br />
+          <a href="mailto:sarka.brzkova@lauder.cz">sarka.brzkova@lauder.cz</a>
+        </p>
+      </div>
     </div>
   );
 }
