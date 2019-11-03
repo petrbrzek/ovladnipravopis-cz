@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const password = get(req, "body.password");
   const email = get(req, "body.email");
   if (password == null || email == null) {
-    res.status(400).json({ error: "Neither password nor email was provided" });
+    res.status(400).json({ error: "Heslo nebo e-mail nebyl vyplněn." });
     return;
   }
 
