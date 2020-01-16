@@ -140,7 +140,7 @@ export default function PublicHomepage() {
 
       <LoginForm />
 
-      <div className="p-3 border-solid header-border-color border-t">
+      <div className="p-3 border-solid header-border-color border-t" hidden>
         <h3 className="header-text-color text-lg font-bold mb-3">
           Ještě nemáte účet?
         </h3>
