@@ -8,7 +8,7 @@ export default async (req, res) => {
     return;
   }
 
-  Level.find().exec((err, items) => {
+  Level.find({ published: true }).exec((err, items) => {
     res.status(200).json(items);
   });
 };
