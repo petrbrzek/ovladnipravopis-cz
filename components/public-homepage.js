@@ -91,7 +91,7 @@ const LoginForm = () => {
         <p className="py-2 text-red-600">
           {errors.afterSubmit && errors.afterSubmit.message}
         </p>
-        <div className="mt-6">
+        <div className="mt-2">
           <button
             type="submit"
             className="p-3 btn block w-full font-bold text-white rounded"
@@ -140,7 +140,7 @@ export default function PublicHomepage() {
 
       <LoginForm />
 
-      <div className="p-3 border-solid header-border-color border-t" hidden>
+      <div className="p-3 border-solid header-border-color border-t">
         <h3 className="header-text-color text-lg font-bold mb-3">
           Ještě nemáte účet?
         </h3>

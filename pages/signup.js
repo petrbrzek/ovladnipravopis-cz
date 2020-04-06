@@ -4,6 +4,7 @@ import Router from "next/router";
 import useForm from "react-hook-form";
 import { useDispatch } from "redux-react-hook";
 
+import usePublicPage from "../lib/use-public-page";
 import { Services } from "../lib/with-services";
 
 import LeftArrow from "../static/left-arrow.svg";
@@ -48,6 +49,8 @@ const SignupForm = () => {
 
   return (
     <div className="border-solid header-border-color border-t p-3 mb-3">
+      <h3 className="header-text-color text-lg font-bold mb-3">Registrace</h3>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email" className="header-text-color block font-bold">
           E-mail
@@ -125,6 +128,8 @@ function Header() {
 }
 
 export default function Settings() {
+  usePublicPage();
+
   return (
     <div className="flex flex-col flex-1">
       <Header />

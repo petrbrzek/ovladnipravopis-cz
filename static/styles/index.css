@@ -47,6 +47,10 @@ body {
   background-color: #d28046;
 }
 
+.btn-light {
+  background-color: #e5ab5b;
+}
+
 @keyframes wrong {
   10%,
   90% {
