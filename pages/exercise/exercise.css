@@ -11,3 +11,9 @@
   background: #90f89e;
   border: 1px solid #707070;
 }
+
+.rating-box {
+  bottom: 75px;
+  right: 25px;
+  min-width: 55px;
+}

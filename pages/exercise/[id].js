@@ -10,6 +10,7 @@ import { shuffleArray } from "../../lib/utils";
 import "./exercise.css";
 import LeftArrow from "../../static/left-arrow.svg";
 import FoxLeftSide from "../../static/fox-left-side.svg";
+import DoneOutline from "../../static/done_outline.svg";
 
 function Header({ title, levelId }) {
   const content = `Klikni na všechny karty, které obsahují pravopisně správný text. 
@@ -43,11 +44,11 @@ const handleAllCorrectCards = ({ allCorrect, api, exerciseId, levelId }) => {
 
     sendUserStats(api, {
       exerciseId,
-      state: "FINISHED"
+      state: "FINISHED",
     });
 
     api.post(api.normalizeUrl(`/api/user/mark`), {
-      json: { exerciseId }
+      json: { exerciseId },
     });
 
     const timeout = setTimeout(() => {
@@ -58,15 +59,15 @@ const handleAllCorrectCards = ({ allCorrect, api, exerciseId, levelId }) => {
 };
 
 const checkIfAllCardsAreCorrect = (cards, cardsRating) => {
-  const correctCards = cards.filter(card => card.correct);
+  const correctCards = cards.filter((card) => card.correct);
   if (correctCards.length === 0) {
     return false;
   }
-  return correctCards.every(card => cardsRating[card._id]);
+  return correctCards.every((card) => cardsRating[card._id]);
 };
 
 const checkIfCardIsCorrect = (cardId, cards) => {
-  const card = cards.find(card => card._id == cardId);
+  const card = cards.find((card) => card._id == cardId);
   return card.correct;
 };
 
@@ -76,8 +77,8 @@ const sendUserStats = (api, { exerciseId, cardId, state }, options = {}) => {
     json: {
       exerciseId,
       cardId,
-      state
-    }
+      state,
+    },
   });
 };
 
@@ -86,7 +87,7 @@ export default function Exercise({ exercise, cards }) {
   const [cardsRating, setCardRating] = React.useState({});
   const [mistake, setMistake] = React.useState(false);
 
-  const handleCardClick = id => {
+  const handleCardClick = (id) => {
     const correct = checkIfCardIsCorrect(id, cards);
     if (correct) {
       setCardRating({ ...cardsRating, [id]: { correct: true } });
@@ -98,11 +99,11 @@ export default function Exercise({ exercise, cards }) {
     sendUserStats(services.api, {
       exerciseId: exercise._id,
       cardId: id,
-      state: "FAILED"
+      state: "FAILED",
     });
   };
 
-  const handleAnimationEnd = e => {
+  const handleAnimationEnd = (e) => {
     if (event.animationName === "wrong") {
       Router.push(`/?level=${exercise.level.levelId}`);
     }
@@ -113,8 +114,13 @@ export default function Exercise({ exercise, cards }) {
     api: services.api,
     allCorrect: isAllCorrect,
     exerciseId: exercise._id,
-    levelId: exercise.level.levelId
+    levelId: exercise.level.levelId,
   });
+
+  const currentCorrectCardsCount = Object.values(cardsRating).filter(
+    (value) => value.correct
+  ).length;
+  const correctCardsCount = cards.filter((card) => card.correct).length;
 
   return (
     <div className="flex flex-col flex-1">
@@ -125,13 +131,13 @@ export default function Exercise({ exercise, cards }) {
           style={{
             position: "fixed",
             top: 0,
-            left: 0
+            left: 0,
           }}
         />
       )}
       <Header title={exercise.title} levelId={exercise.level.levelId} />
       <div className="flex flex-col p-3">
-        {exercise.cards.map(card => {
+        {exercise.cards.map((card) => {
           return (
             <button
               key={card._id}
@@ -144,13 +150,21 @@ export default function Exercise({ exercise, cards }) {
                 "wrong shake": cardsRating[card._id]?.correct === false,
                 default: cardsRating[card._id] == null,
                 "border-gray-500 border-solid border p-2 mb-4 rounded-sm": true,
-                "text-left font-bold pl-4 text-base text-gray-800": true
+                "text-left font-bold pl-4 text-base text-gray-800": true,
               })}
             >
               {card.content}
             </button>
           );
         })}
+        <div className="rating-box flex flex-col items-center correct p-1 rounded-sm fixed">
+          <div>
+            <DoneOutline />
+          </div>
+          <b>
+            {currentCorrectCardsCount} / {correctCardsCount}
+          </b>
+        </div>
       </div>
     </div>
   );
@@ -160,20 +174,20 @@ Exercise.getInitialProps = async ({ query, req, services: { api } }) => {
   const { id } = query;
   const options = {
     headers: {
-      cookie: req?.headers?.cookie
+      cookie: req?.headers?.cookie,
     },
-    req
+    req,
   };
 
   sendUserStats(api, { exerciseId: id, state: "OPEN" }, options);
 
   const [cards, exercise] = await Promise.all([
     api.get(api.normalizeUrl(`/api/cards?exerciseId=${id}`, req), options),
-    api.get(api.normalizeUrl(`/api/exercise?id=${id}`, req), options)
+    api.get(api.normalizeUrl(`/api/exercise?id=${id}`, req), options),
   ]);
 
   return {
     cards,
-    exercise: { ...exercise, cards: [...shuffleArray(exercise.cards)] }
+    exercise: { ...exercise, cards: [...shuffleArray(exercise.cards)] },
   };
 };
