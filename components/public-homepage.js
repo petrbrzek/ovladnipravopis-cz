@@ -14,7 +14,7 @@ export async function login(api, { email, password }) {
     result = await api
       .post(api.normalizeUrl(`/api/user/login`), {
         json: { password, email },
-        throwHttpErrors: false
+        throwHttpErrors: false,
       })
       .json();
   } catch (e) {
@@ -28,7 +28,7 @@ const LoginForm = () => {
   const services = React.useContext(Services);
   const dispatch = useDispatch();
   const { handleSubmit, register, errors, setError } = useForm();
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     const result = await login(services.api, values);
 
     if (result.error) {
@@ -38,7 +38,7 @@ const LoginForm = () => {
 
     dispatch({
       type: "USER:LOGGED_IN",
-      loggedIn: true
+      loggedIn: true,
     });
     Router.replace("/");
   };
@@ -58,8 +58,8 @@ const LoginForm = () => {
             required: "E-mail je povinný",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "E-mail má špatný formát."
-            }
+              message: "E-mail má špatný formát.",
+            },
           })}
         />
         <p className="my-2 text-red-600">
@@ -76,7 +76,7 @@ const LoginForm = () => {
           type="password"
           ref={register({
             required: "Heslo je povinné",
-            minLength: 4
+            minLength: 4,
           })}
         />
         <p className="my-2 text-red-600">
@@ -99,6 +99,11 @@ const LoginForm = () => {
             PŘIHLÁSIT SE
           </button>
         </div>
+        <p className="mt-4 header-text-color font-semibold text-center">
+          <Link href="/forget-password">
+            <a>Zapomenuté heslo?</a>
+          </Link>
+        </p>
       </form>
     </div>
   );
@@ -157,7 +162,7 @@ export default function PublicHomepage() {
       <div
         className="flex flex-1 px-3 pt-3 pb-5 mt-1 text-xs border-solid header-border-color border-t"
         style={{
-          background: "url(/static/fox-left-side.svg) bottom right no-repeat"
+          background: "url(/static/fox-left-side.svg) bottom right no-repeat",
         }}
       >
         <p className="header-text-color font-semibold leading-loose">
