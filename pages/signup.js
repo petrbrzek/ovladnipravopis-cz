@@ -16,7 +16,7 @@ async function signup(api, { email, password }) {
     result = await api
       .post(api.normalizeUrl(`/api/user/signup`), {
         json: { password, email },
-        throwHttpErrors: false
+        throwHttpErrors: false,
       })
       .json();
   } catch (e) {
@@ -30,7 +30,7 @@ const SignupForm = () => {
   const services = React.useContext(Services);
   const dispatch = useDispatch();
   const { handleSubmit, register, errors, setError } = useForm();
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     const result = await signup(services.api, values);
 
     if (result.error) {
@@ -42,7 +42,7 @@ const SignupForm = () => {
 
     dispatch({
       type: "USER:LOGGED_IN",
-      loggedIn: true
+      loggedIn: true,
     });
     Router.replace("/");
   };
@@ -64,8 +64,8 @@ const SignupForm = () => {
             required: "E-mail je povinný",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "E-mail má špatný formát."
-            }
+              message: "E-mail má špatný formát.",
+            },
           })}
         />
         <p className="my-2 text-red-600">
@@ -82,7 +82,7 @@ const SignupForm = () => {
           type="password"
           ref={register({
             required: "Heslo je povinné",
-            minLength: 4
+            minLength: 4,
           })}
         />
         <p className="my-2 text-red-600">
@@ -90,7 +90,7 @@ const SignupForm = () => {
         </p>
         <p className="my-2 text-red-600">
           {errors.password && errors.password.type == "minLength" && (
-            <span>Heslo musi mit minimalne 4 znaky</span>
+            <span>Heslo musí mít minimálně 4 znaky</span>
           )}
         </p>
 
@@ -127,7 +127,7 @@ function Header() {
   );
 }
 
-export default function Settings() {
+export default function Signup() {
   usePublicPage();
 
   return (
