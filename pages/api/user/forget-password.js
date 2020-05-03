@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     to: email,
     from: "info@ovladnipravopis.cz",
     subject: "🦊 Ovládni pravopis - Obnovení hesla",
-    text: `Pokračujte kliknutím na odkaz pro obnovení hesla ${resetPasswordLink}.`,
+    text: `Pokračujte kliknutím na odkaz pro obnovení hesla ${resetPasswordLink}`,
   };
 
   try {
