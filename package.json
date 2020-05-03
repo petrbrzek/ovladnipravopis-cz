@@ -13,6 +13,7 @@
   "author": "Petr Brzek",
   "private": true,
   "dependencies": {
+    "@sendgrid/mail": "^7.0.0",
     "admin-bro": "^1.2.0",
     "admin-bro-expressjs": "^0.2.0",
     "admin-bro-mongoose": "^0.3.0",
