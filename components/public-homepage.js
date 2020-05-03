@@ -167,8 +167,15 @@ export default function PublicHomepage() {
       >
         <p className="header-text-color font-semibold leading-loose">
           Máte nápad na zlepšení? 🙂Napište mi na adresu:
-          <br />
-          <a href="mailto:sarka.brzkova@lauder.cz">sarka.brzkova@lauder.cz</a>
+          <a href="mailto:sarka.brzkova@lauder.cz"> sarka.brzkova@lauder.cz </a>
+          •
+          <Link href="/legal/terms-and-conditions">
+            <a> Všeobecné obchodní podmínky </a>
+          </Link>
+          •
+          <Link href="/legal/privacy-policy">
+            <a> Zásady ochrany osobních údajů </a>
+          </Link>
         </p>
       </div>
     </div>
