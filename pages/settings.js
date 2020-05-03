@@ -8,7 +8,7 @@ import { getHighestLevel } from "../lib/user-utils";
 
 import LeftArrow from "../static/left-arrow.svg";
 
-function Header({ imageSrc }) {
+function Header({ imageSrc, email = "" }) {
   const bounds = React.useMemo(() => ({ width: "100px", height: "100px" }), []);
 
   return (
@@ -21,7 +21,9 @@ function Header({ imageSrc }) {
         </Link>
       </div>
       <div className="flex flex-col flex-1 justify-center p-2 px-3">
-        <h1 className="text-base font-bold leading-tight">Můj profil</h1>
+        <h1 className="text-base font-bold leading-tight">
+          Můj profil – <i>{email}</i>
+        </h1>
       </div>
       <div className="flex flex-1">
         <div
@@ -38,8 +40,8 @@ function Header({ imageSrc }) {
 export default function Settings() {
   const services = React.useContext(Services);
   const mapState = React.useCallback(
-    state => ({
-      personalInfo: state.user.personalInfo
+    (state) => ({
+      personalInfo: state.user.personalInfo,
     }),
     []
   );
@@ -62,12 +64,12 @@ export default function Settings() {
     level4:
       "skvěle se vyzná v systému pravopisu, ovládá základní i obtížné jevy a své znalosti kombinuje.",
     level5:
-      "perfektně ovládá pravopis, rozumí jeho pravidlům a chybuje jen, když se špatně vyspí."
+      "perfektně ovládá pravopis, rozumí jeho pravidlům a chybuje jen, když se špatně vyspí.",
   };
 
   return (
     <div className="flex flex-col flex-1">
-      <Header imageSrc={rankImage} />
+      <Header imageSrc={rankImage} email={personalInfo.user.email} />
       <div className="p-3">
         <div className="flex justify-center">
           <img src={rankImage} style={{ height: "140px" }} />
