@@ -1,18 +1,20 @@
 import React from "react";
 import { useMappedState, useDispatch } from "redux-react-hook";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { Services } from "../lib/with-services";
 import Footer from "../components/footer";
 
 export default function Global({ children }) {
   const services = React.useContext(Services);
+  const router = useRouter();
   const dispatch = useDispatch();
   const mapState = React.useCallback(
-    state => ({
+    (state) => ({
       loggedIn: state.user.loggedIn,
       user: state.user,
-      levels: state.levels
+      levels: state.levels,
     }),
     []
   );
@@ -30,7 +32,7 @@ export default function Global({ children }) {
       dispatch({ type: "USER:PERSONAL_INFO", personalInfo });
     }
     fetchData();
-  }, [user.updatedAt, loggedIn, lastLevel?.updatedAt]);
+  }, [user.updatedAt, loggedIn, lastLevel?.updatedAt, router.pathname]);
 
   return (
     <>
@@ -52,15 +54,27 @@ export default function Global({ children }) {
         <meta name="apple-mobile-web-app-title" content="🦊 Ovládni pravopis" />
         <meta name="application-name" content="🦊 Ovládni pravopis" />
 
-        <meta name="description" content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink." />
-        <meta property="og:type" content="website"/>
+        <meta
+          name="description"
+          content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink."
+        />
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content="🦊 Ovládni pravopis" />
-        <meta property="og:title" content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink." />
-        <meta property="og:description" content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink." />
-        
+        <meta
+          property="og:title"
+          content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink."
+        />
+        <meta
+          property="og:description"
+          content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink."
+        />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="🦊 Ovládni pravopis" />
-        <meta name="twitter:description" content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink."/>
+        <meta
+          name="twitter:description"
+          content="Pravopis dokáže člověka dost potrápit, nezvládnutý pravopis dokonce ztrapnit. Říká se ale, těžko na cvičišti, lehko na bojišti. Aplikace Ovládni pravopis je prostorem pro trénink."
+        />
       </Head>
 
       {children}
