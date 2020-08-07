@@ -1,9 +1,11 @@
 node_modules
 .next
 .env
+.env.local
 .adminbro
 _local-script.js
 dev-env
 prisma/prisma
 prisma/__migrations
 prisma/migrations/dev
+.vercel

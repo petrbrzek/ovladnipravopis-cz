@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
   destroyCookie({ res }, "token", {
     httpOnly: true,
-    path: "/"
+    path: "/",
   });
 
   res.status(200).json({ message: "logout" });

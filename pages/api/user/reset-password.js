@@ -3,9 +3,11 @@ const jwt = require("jsonwebtoken");
 const get = require("lodash.get");
 const crypto = require("crypto");
 
+const createConnection = require("../../../lib/db/connection");
 const User = require("../../../lib/db/models/user");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const plainPassword = get(req, "body.password");
   const resetPasswordToken = get(req, "body.token");
 

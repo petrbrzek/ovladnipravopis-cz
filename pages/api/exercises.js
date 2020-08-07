@@ -1,7 +1,9 @@
 import { Exercise, Level } from "../../lib/db/models";
 import { getUserId } from "../../lib/user-utils";
+import createConnection from "../../lib/db/connection";
 
 export default async (req, res) => {
+  await createConnection();
   const levelId = `${req.query.level || 1}`;
   const userId = getUserId({ req });
 
@@ -16,7 +18,7 @@ export default async (req, res) => {
     .exec();
 
   const userLevels = [...levelsByUser, { levelId: 1 }];
-  const canSee = userLevels.find(level => level.levelId == levelId);
+  const canSee = userLevels.find((level) => level.levelId == levelId);
 
   if (!canSee) {
     res.status(403).json({ error: true, reason: "LEVEL_LOCKED" });
@@ -34,19 +36,19 @@ export default async (req, res) => {
           {
             path: "cards",
             match: { published: { $eq: true } },
-            select: "content _id exercises"
+            select: "content _id exercises",
           },
           {
             path: "users",
             match: { _id: { $eq: userId } },
-            select: "_id"
-          }
-        ]
+            select: "_id",
+          },
+        ],
       })
       .populate({
         path: "users",
         match: { _id: { $eq: userId } },
-        select: "_id"
+        select: "_id",
       })
       .select("_id title levelId rank users")
       .exec();

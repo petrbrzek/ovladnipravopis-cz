@@ -3,9 +3,11 @@ const jwt = require("jsonwebtoken");
 const { setCookie } = require("nookies");
 const get = require("lodash.get");
 
+const createConnection = require("../../../lib/db/connection");
 const { User, Level } = require("../../../lib/db/models");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const password = get(req, "body.password");
   const email = get(req, "body.email");
   if (password == null || email == null) {
@@ -34,14 +36,14 @@ module.exports = async (req, res) => {
   setCookie({ res }, "token", token, {
     maxAge: 30 * 24 * 60 * 60,
     httpOnly: true,
-    path: "/"
+    path: "/",
   });
 
   try {
     const level = await Level.findOne({ levelId: 1 })
       .populate({
         path: "users",
-        match: { _id: { $eq: user.id } }
+        match: { _id: { $eq: user.id } },
       })
       .exec();
 
@@ -57,7 +59,7 @@ module.exports = async (req, res) => {
     token,
     user: {
       id: user.id,
-      email: user.email
-    }
+      email: user.email,
+    },
   });
 };

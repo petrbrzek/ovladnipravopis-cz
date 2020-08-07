@@ -1,8 +1,10 @@
 import { Exercise, Level } from "../../lib/db/models";
 import { isUserLogged } from "../../lib/user-utils";
 import get from "lodash.get";
+import createConnection from "../../lib/db/connection";
 
 export default async (req, res) => {
+  await createConnection();
   const loggedIn = isUserLogged({ req });
   if (!loggedIn) {
     res.status(403).json({ error: true, reason: "USER_NOT_LOGGED_IN" });
@@ -14,7 +16,7 @@ export default async (req, res) => {
   const level = await Level.findOne()
     .populate({
       path: "exercises",
-      match: { _id: { $eq: id } }
+      match: { _id: { $eq: id } },
     })
     .select("title levelId -exercises")
     .exec();
@@ -23,11 +25,11 @@ export default async (req, res) => {
     .populate({
       path: "cards",
       select: "id content",
-      match: { published: { $eq: true } }
+      match: { published: { $eq: true } },
     })
     .populate({
       path: "level",
-      select: "id levelId"
+      select: "id levelId",
     })
     .select("-published -users -__v -createdAt -updatedAt")
     .exec();
@@ -37,6 +39,6 @@ export default async (req, res) => {
     title: exercise.title,
     content: exercise.content,
     cards: exercise.cards,
-    level
+    level,
   });
 };

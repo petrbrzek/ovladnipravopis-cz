@@ -2,9 +2,11 @@ const crypto = require("crypto");
 const get = require("lodash.get");
 const sgMail = require("@sendgrid/mail");
 
+const createConnection = require("../../../lib/db/connection");
 const User = require("../../../lib/db/models/user");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const email = get(req, "body.email");
 
   if (email == null) {

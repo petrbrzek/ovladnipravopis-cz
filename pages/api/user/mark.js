@@ -1,9 +1,11 @@
 const { getUserId } = require("../../../lib/user-utils");
 const get = require("lodash.get");
 
+const createConnection = require("../../../lib/db/connection");
 const { Exercise, Level } = require("../../../lib/db/models");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const userId = getUserId({ req });
   if (!userId) {
     res.status(403).json({ error: true, reason: "USER_NOT_LOGGED_IN" });
@@ -21,7 +23,7 @@ module.exports = async (req, res) => {
   const exercise = await Exercise.findOne({ _id: exerciseId })
     .populate({
       path: "users",
-      match: { _id: { $eq: userId } }
+      match: { _id: { $eq: userId } },
     })
     .exec();
 
@@ -44,23 +46,23 @@ module.exports = async (req, res) => {
     .in([userId])
     .exec();
 
-  const finishedLevel = levelExercises.exercises.every(exercise => {
-    return userExercises.find(value => {
+  const finishedLevel = levelExercises.exercises.every((exercise) => {
+    return userExercises.find((value) => {
       return value.id === exercise.id;
     });
   });
 
   const nextLevel = await Level.findOne({
-    levelId: String(Number(levelExercises.levelId) + 1)
+    levelId: String(Number(levelExercises.levelId) + 1),
   });
 
   if (finishedLevel && nextLevel) {
     const level = await Level.findOne({
-      levelId: String(Number(levelExercises.levelId) + 1)
+      levelId: String(Number(levelExercises.levelId) + 1),
     })
       .populate({
         path: "users",
-        match: { _id: { $eq: userId } }
+        match: { _id: { $eq: userId } },
       })
       .exec();
 

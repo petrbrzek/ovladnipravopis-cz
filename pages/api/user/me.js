@@ -1,9 +1,11 @@
 const { getUserId } = require("../../../lib/user-utils");
 
+const createConnection = require("../../../lib/db/connection");
 const User = require("../../../lib/db/models/user");
 const Level = require("../../../lib/db/models/level");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const userId = getUserId({ req });
 
   if (!userId) {

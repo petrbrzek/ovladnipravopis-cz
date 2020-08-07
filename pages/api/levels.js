@@ -1,7 +1,9 @@
 import { Level } from "../../lib/db/models";
 import { isUserLogged } from "../../lib/user-utils";
+import createConnection from "../../lib/db/connection";
 
 export default async (req, res) => {
+  await createConnection();
   const loggedIn = isUserLogged({ req });
   if (!loggedIn) {
     res.status(403).json({ error: true, reason: "USER_NOT_LOGGED_IN" });

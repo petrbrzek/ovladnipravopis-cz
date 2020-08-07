@@ -2,9 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const get = require("lodash.get");
 
+const createConnection = require("../../../lib/db/connection");
 const User = require("../../../lib/db/models/user");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const plainPassword = get(req, "body.password");
   const email = get(req, "body.email");
 
@@ -27,7 +29,7 @@ module.exports = async (req, res) => {
   const password = await bcrypt.hash(plainPassword, 10);
   const newUser = new User({
     email,
-    password
+    password,
   });
   const user = await newUser.save();
   const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
@@ -36,7 +38,7 @@ module.exports = async (req, res) => {
     token,
     user: {
       id: user.id,
-      email: user.email
-    }
+      email: user.email,
+    },
   });
 };

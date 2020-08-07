@@ -1,9 +1,11 @@
 const { getUserId } = require("../../../lib/user-utils");
 const get = require("lodash.get");
 
+const createConnection = require("../../../lib/db/connection");
 const { UserStats } = require("../../../lib/db/models");
 
 module.exports = async (req, res) => {
+  await createConnection();
   const userId = getUserId({ req });
   if (!userId) {
     res.status(403).json({ error: true, reason: "USER_NOT_LOGGED_IN" });
@@ -24,7 +26,7 @@ module.exports = async (req, res) => {
     user: { _id: userId },
     exercise: { _id: exerciseId },
     ...(cardId && { card: { _id: cardId } }),
-    state
+    state,
   });
   await userStats.save();
 

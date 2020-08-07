@@ -1,8 +1,10 @@
 import { Exercise } from "../../lib/db/models";
 import { isUserLogged } from "../../lib/user-utils";
 import get from "lodash.get";
+import createConnection from "../../lib/db/connection";
 
 export default async (req, res) => {
+  await createConnection();
   const loggedIn = isUserLogged({ req });
   if (!loggedIn) {
     res.status(403).json({ error: true, reason: "USER_NOT_LOGGED_IN" });
@@ -15,7 +17,7 @@ export default async (req, res) => {
     .populate({
       path: "cards",
       select: "correct",
-      match: { published: { $eq: true } }
+      match: { published: { $eq: true } },
     })
     .select("cards -_id")
     .exec((err, items) => {
