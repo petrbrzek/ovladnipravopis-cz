@@ -24,7 +24,7 @@ app.prepare().then(async () => {
 
   const adminBro = new AdminBro({
     databases: [mongooseDb],
-    resources: Object.keys(mongooseModels).map(key => mongooseModels[key])
+    resources: Object.keys(mongooseModels).map((key) => mongooseModels[key]),
   });
   const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
     authenticate: async (email, password) => {
@@ -38,16 +38,16 @@ app.prepare().then(async () => {
       return false;
     },
     cookieName: "adminbro", // TODO: save it to env
-    cookiePassword: "secret"
+    cookiePassword: "secret",
   });
 
   server.use(adminBro.options.rootPath, router);
 
-  server.all("*", (req, res) => {
-    return handle(req, res);
-  });
+  // server.all("*", (req, res) => {
+  //   return handle(req, res);
+  // });
 
-  server.listen(port, err => {
+  server.listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
   });
