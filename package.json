@@ -5,7 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "cross-env NODE_ENV=production next start",
-    "admin": "cross-env NODE_ENV=production node server.js"
+    "admin": "NODE_ENV=production node server.js"
   },
   "engines": {
     "node": "12.x"
