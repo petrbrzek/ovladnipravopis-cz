@@ -42,10 +42,7 @@ app.prepare().then(async () => {
   });
 
   server.use(adminBro.options.rootPath, router);
-
-  // server.all("*", (req, res) => {
-  //   return handle(req, res);
-  // });
+  server.use("/", router);
 
   server.listen(port, (err) => {
     if (err) throw err;
