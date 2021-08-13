@@ -33,7 +33,7 @@
     "ky-universal": "^0.3.0",
     "lodash.get": "^4.4.2",
     "mongoose": "^5.7.3",
-    "next": "^9.5.1",
+    "next": "^11.1.0",
     "nookies": "^2.0.8",
     "react": "^16.13.1",
     "react-confetti": "^4.0.1",
